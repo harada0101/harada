@@ -13,3 +13,6 @@ phases:
   post_build:
     commands:
       - echo 'Hello World (POST_BUILD phase)'
+artifacts:
+    files:
+        - '**/*'
