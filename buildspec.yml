@@ -1,20 +1,25 @@
 version: 0.2
 
+env:
+  # 省略
 phases:
   install:
-    commands:
-      - echo 'Hello World (INSTALL phase)'
+    # 省略
   pre_build:
     commands:
-      - echo 'Hello World (PRE_BUILD phase)'
+      - # 省略
+      - REPOSITORY_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_NAME}
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - # 省略
   build:
     commands:
-      - echo 'Hello World (BUILD phase)'
+      # 省略
   post_build:
     commands:
-      - echo 'Hello World (POST_BUILD phase)'
+      - # 省略
+      - echo "[{\"name\":\"${IMAGE_NAME}\",\"imageUri\":\"${REPOSITORY_URI}:${IMAGE_TAG}\"}]" > imagedefinitions.json
+      - printf '{"Version":"1.0","ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
 artifacts:
-  files:
-    - imageDetail.json
-    - appspec.yaml
-    - taskdef.json
+    files:
+      - imagedefinitions.json
+      - imageDetail.json
