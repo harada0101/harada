@@ -1,7 +1,5 @@
 version: 0.2
 
-env:
-  # 省略
 phases:
   install:
     # 省略
