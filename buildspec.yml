@@ -3,13 +3,24 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo 'Hello World (INSTALL phase)'
+      - echo "install > commands"
+    finally:
+      - echo "install > finally"
   pre_build:
     commands:
-      - echo 'Hello World (PRE_BUILD phase)'
+      - echo "pre_build > commands"
+    finally:
+      - echo "pre_build > finally"
   build:
     commands:
-      - echo 'Hello World (BUILD phase)'
+      - echo "build > commands"
+    finally:
+      - echo "build > finally"
   post_build:
     commands:
-      - echo 'Hello World (POST_BUILD phase)'
+      - echo "post_build > commands"
+    finally:
+      - echo "post_build > finally"
+artifacts:
+  files:
+    - ./**/*
